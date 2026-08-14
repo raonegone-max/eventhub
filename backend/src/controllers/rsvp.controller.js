@@ -19,6 +19,20 @@ async function createRSVP(req, res) {
             })
         }
 
+        // check for an existing RSVP document (going OR cancelled) for this event+user pair.
+        // the unique index only allows ONE such document to ever exist, so we must reuse
+        // it rather than trying to create a fresh one every time.
+        const existingRSVP = await rsvpModel.findOne({
+            event: eventId,
+            user: req.user.id
+        })
+
+        if (existingRSVP && existingRSVP.status === 'going') {
+            return res.status(400).json({
+                message: "You have already RSVP'd to this event"
+            })
+        }
+
         // capacity check — only matters if a limit is actually set
         if (event.capacity !== null) {
             const goingCount = await rsvpModel.countDocuments({
@@ -33,10 +47,19 @@ async function createRSVP(req, res) {
             }
         }
 
-        const rsvp = await rsvpModel.create({
-            event: eventId,
-            user: req.user.id
-        })
+        let rsvp
+
+        if (existingRSVP) {
+            // they had cancelled before — flip the same document back to 'going'
+            // instead of inserting a new one (which the unique index would reject anyway)
+            existingRSVP.status = 'going'
+            rsvp = await existingRSVP.save()
+        } else {
+            rsvp = await rsvpModel.create({
+                event: eventId,
+                user: req.user.id
+            })
+        }
 
         res.status(201).json({
             message: "RSVP successful",
@@ -44,7 +67,8 @@ async function createRSVP(req, res) {
         })
 
     } catch (err) {
-        // duplicate RSVP hits the unique index we set on {event, user}
+        // fallback safety net — shouldn't normally hit this now, but kept in case
+        // of a race condition between two simultaneous requests
         if (err.code === 11000) {
             return res.status(400).json({
                 message: "You have already RSVP'd to this event"
