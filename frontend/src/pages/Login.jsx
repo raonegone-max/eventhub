@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import { useAuth } from "../api/AuthContext"
 
 function Login() {
@@ -8,6 +8,11 @@ function Login() {
     const [error, setError] = useState("")
     const { login } = useAuth()
     const navigate = useNavigate()
+    const location = useLocation()
+
+    // if ProtectedRoute redirected here, it left behind where the user was headed —
+    // send them back there after a successful login instead of always going to "/"
+    const destination = location.state?.from?.pathname || "/"
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -16,7 +21,7 @@ function Login() {
         const success = await login({ email, password })
 
         if (success) {
-            navigate("/")
+            navigate(destination, { replace: true })
         } else {
             setError("Invalid email or password")
         }

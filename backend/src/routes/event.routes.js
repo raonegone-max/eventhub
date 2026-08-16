@@ -2,7 +2,9 @@ const express = require("express");
 const router = express.Router();
 const { authUser } = require("../middlewares/auth.middleware");
 const { isOrganizer } = require("../middlewares/role.middleware");
-const { createEvent, getEvents, getEventById, updateEvent, deleteEvent } = require("../controllers/event.controller");
+const { createEvent, getEvents, getEventById, getMyEvents, updateEvent, deleteEvent } = require("../controllers/event.controller");
+
+router.get("/mine", authUser, isOrganizer, getMyEvents);
 
 router.get("/", getEvents);
 

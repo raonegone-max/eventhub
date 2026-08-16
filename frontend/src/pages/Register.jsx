@@ -24,7 +24,7 @@ function Register() {
     }
 
     return (
-        <div className="max-w-sm mx-auto mt-16 p-6 border rounded-lg">
+        <div className="max-w-sm mx-auto mt-16  p-6 border rounded-lg">
             <h1 className="text-2xl font-bold mb-4">Register</h1>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-3">

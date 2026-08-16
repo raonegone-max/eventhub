@@ -136,10 +136,26 @@ async function deleteEvent(req, res) {
     }
 }
 
+async function getMyEvents(req, res) {
+    try {
+        const events = await eventModel.find({ organizer: req.user.id }).sort({ date: 1 })
+
+        res.status(200).json({
+            events
+        })
+
+    } catch (err) {
+        res.status(500).json({
+            message: "Something went wrong while fetching your events"
+        })
+    }
+}
+
 module.exports = {
     createEvent,
     getEvents,
     getEventById,
+    getMyEvents,
     updateEvent,
     deleteEvent
 }
