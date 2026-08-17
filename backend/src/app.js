@@ -3,7 +3,13 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const app = express();
 
-app.use(cors({ origin: 'http://localhost:5173', credentials: true }))
+// FRONTEND_URL is set in your .env locally (http://localhost:5173) and in
+// Render's dashboard for production (your real Vercel URL) — this way the
+// same code works in both places without editing anything by hand
+app.use(cors({
+    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+    credentials: true
+}))
 app.use(express.json());
 app.use(cookieParser())
 
