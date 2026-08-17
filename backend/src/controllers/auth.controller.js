@@ -5,13 +5,18 @@ const tokenBlacklistModel = require("../models/blacklist.model")
 
 async function registerUserController(req, res) {
     try {
-        const { name, email, password } = req.body
+        const { name, email, password, role } = req.body
 
         if (!name || !email || !password) {
             return res.status(400).json({
                 message: "Please provide username, email and password"
             })
         }
+
+        // whitelist check — never trust the client to send an arbitrary role string,
+        // even though the schema's enum would also reject anything invalid
+        const allowedRoles = ['student', 'organizer']
+        const finalRole = allowedRoles.includes(role) ? role : 'student'
 
         const isUserAlreadyExists = await userModel.findOne({
             $or: [{ name }, { email }]
@@ -28,7 +33,8 @@ async function registerUserController(req, res) {
         const user = await userModel.create({
             name,
             email,
-            password: hash
+            password: hash,
+            role: finalRole
         })
 
         const token = jwt.sign(

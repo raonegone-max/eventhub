@@ -18,6 +18,7 @@ export default function Register() {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [role, setRole] = useState("student")
     const [showPassword, setShowPassword] = useState(false)
     const [error, setError] = useState("")
     const [submitting, setSubmitting] = useState(false)
@@ -30,7 +31,7 @@ export default function Register() {
         setSubmitting(true)
 
         try {
-            const success = await register({ name, email, password })
+            const success = await register({ name, email, password, role })
             if (success) {
                 navigate("/")
             } else {
@@ -138,6 +139,42 @@ export default function Register() {
                                     className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
                                 >
                                     {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Role Selector */}
+                        <div>
+                            <label className="block text-xs font-mono font-semibold text-slate-300 uppercase mb-1.5">
+                                I am a
+                            </label>
+                            <div className="grid grid-cols-2 gap-3">
+                                <button
+                                    type="button"
+                                    onClick={() => setRole("student")}
+                                    className={`flex flex-col items-center gap-1.5 py-3.5 rounded-xl border text-sm font-semibold transition ${
+                                        role === "student"
+                                            ? "bg-amber-500/10 border-amber-400/60 text-amber-300"
+                                            : "bg-[#0e1422] border-white/10 text-slate-400 hover:text-white hover:border-white/20"
+                                    }`}
+                                >
+                                    <GraduationCap className="w-5 h-5" />
+                                    <span>Student</span>
+                                    <span className="text-[10px] font-mono font-normal text-slate-500">Browse &amp; RSVP</span>
+                                </button>
+
+                                <button
+                                    type="button"
+                                    onClick={() => setRole("organizer")}
+                                    className={`flex flex-col items-center gap-1.5 py-3.5 rounded-xl border text-sm font-semibold transition ${
+                                        role === "organizer"
+                                            ? "bg-amber-500/10 border-amber-400/60 text-amber-300"
+                                            : "bg-[#0e1422] border-white/10 text-slate-400 hover:text-white hover:border-white/20"
+                                    }`}
+                                >
+                                    <Sparkles className="w-5 h-5" />
+                                    <span>Organizer</span>
+                                    <span className="text-[10px] font-mono font-normal text-slate-500">Host &amp; manage</span>
                                 </button>
                             </div>
                         </div>
