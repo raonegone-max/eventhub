@@ -67,7 +67,7 @@ export default function MyRSVPs() {
             {/* Header */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-white/10">
                 <div>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-400/10 border border-indigo-400/20 text-indigo-300 text-xs font-mono mb-3">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-400/10 border border-blue-400/20 text-blue-300 text-xs font-mono mb-3">
                         <Ticket className="w-3.5 h-3.5" />
                         <span>STUDENT PASS WALLET</span>
                     </div>
@@ -81,7 +81,7 @@ export default function MyRSVPs() {
 
                 <Link
                     to="/events"
-                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-sm bg-white/10 hover:bg-white/15 text-white border border-white/10 hover:border-amber-400/40 transition self-start md:self-auto shrink-0"
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-sm bg-white/10 hover:bg-white/15 text-white border border-white/10 hover:border-amber-400/40 transition self-start md:self-auto shrink-0 cursor-pointer"
                 >
                     <Compass className="w-4 h-4 text-amber-400" />
                     <span>Explore More Events</span>
@@ -98,8 +98,8 @@ export default function MyRSVPs() {
             {/* Passes List / Grid */}
             <div className="mt-6">
                 {rsvps.length === 0 ? (
-                    <div className="text-center py-20 bg-white/[0.02] border border-white/5 rounded-3xl p-8 max-w-lg mx-auto">
-                        <div className="w-16 h-16 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center mx-auto mb-4">
+                    <div className="text-center py-20 bg-[#0c101a]/60 border border-white/5 rounded-3xl p-8 max-w-lg mx-auto">
+                        <div className="w-16 h-16 rounded-2xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center mx-auto mb-4">
                             <Ticket className="w-8 h-8" />
                         </div>
                         <h3 className="text-xl font-bold text-white font-sans">Pass Wallet Is Empty</h3>
@@ -108,7 +108,7 @@ export default function MyRSVPs() {
                         </p>
                         <Link
                             to="/events"
-                            className="inline-flex items-center gap-2 mt-6 px-6 py-3 rounded-xl font-bold text-sm bg-amber-500 text-slate-950 shadow-md transition hover:bg-amber-400"
+                            className="inline-flex items-center gap-2 mt-6 px-6 py-3 rounded-xl font-bold text-sm bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 shadow-md transition hover:from-amber-400 hover:to-orange-400"
                         >
                             <Compass className="w-4 h-4" />
                             <span>Browse Campus Events</span>
@@ -129,11 +129,11 @@ export default function MyRSVPs() {
                             return (
                                 <div
                                     key={rsvp._id}
-                                    className="relative flex flex-col sm:flex-row bg-[#131b2c]/90 border border-white/10 hover:border-indigo-400/40 rounded-3xl overflow-hidden shadow-xl transition-all"
+                                    className="neon-card neon-glow-blue relative flex flex-col sm:flex-row min-h-[170px] overflow-hidden transition-all duration-300 group"
                                 >
                                     {/* Left Stub */}
-                                    <div className="p-6 bg-gradient-to-br from-indigo-500/15 via-indigo-500/5 to-transparent sm:w-32 shrink-0 border-b sm:border-b-0 sm:border-r border-white/10 flex sm:flex-col items-center justify-between sm:justify-center text-center">
-                                        <span className="text-[11px] font-mono font-bold tracking-widest text-indigo-400">
+                                    <div className="p-6 bg-gradient-to-br from-blue-500/15 via-blue-500/5 to-transparent sm:w-32 shrink-0 border-b sm:border-b-0 sm:border-r border-white/10 flex sm:flex-col items-center justify-between sm:justify-center text-center">
+                                        <span className="text-[11px] font-mono font-bold tracking-widest text-blue-400">
                                             {weekday}
                                         </span>
                                         <span className="text-3xl sm:text-4xl font-extrabold text-white font-sans tracking-tight my-0.5">
@@ -159,7 +159,7 @@ export default function MyRSVPs() {
 
                                             <Link
                                                 to={`/events/${event._id}`}
-                                                className="text-lg font-bold text-white hover:text-amber-400 transition font-sans line-clamp-1"
+                                                className="text-lg font-bold text-white hover:text-amber-300 transition font-sans line-clamp-1"
                                             >
                                                 {event.title}
                                             </Link>
@@ -174,7 +174,7 @@ export default function MyRSVPs() {
                                         <div className="flex items-center justify-between pt-4 border-t border-white/5">
                                             <Link
                                                 to={`/events/${event._id}`}
-                                                className="inline-flex items-center gap-1 text-xs font-semibold text-amber-400 hover:text-amber-300"
+                                                className="inline-flex items-center gap-1 text-xs font-semibold text-white/90 hover:text-amber-300 transition"
                                             >
                                                 <span>View Pass</span>
                                                 <ArrowRight className="w-3.5 h-3.5" />
@@ -182,7 +182,7 @@ export default function MyRSVPs() {
 
                                             <button
                                                 onClick={() => setCancelModalRsvp(rsvp)}
-                                                className="text-xs font-mono text-rose-400 hover:underline"
+                                                className="text-xs font-mono text-rose-400 hover:underline cursor-pointer"
                                             >
                                                 Cancel RSVP
                                             </button>
@@ -197,8 +197,8 @@ export default function MyRSVPs() {
 
             {/* Custom Cancel Confirmation Modal */}
             {cancelModalRsvp && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-                    <div className="max-w-md w-full p-6 sm:p-8 rounded-3xl bg-[#161f30] border border-white/15 shadow-2xl text-center space-y-4">
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-xl animate-in fade-in duration-200">
+                    <div className="max-w-md w-full p-6 sm:p-8 rounded-3xl bg-[#0c101a] border border-white/15 shadow-2xl text-center space-y-4 neon-glow-amber">
                         <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center mx-auto">
                             <Ticket className="w-7 h-7" />
                         </div>
@@ -210,14 +210,14 @@ export default function MyRSVPs() {
                             <button
                                 onClick={() => setCancelModalRsvp(null)}
                                 disabled={cancellingId === cancelModalRsvp.event?._id}
-                                className="py-3 px-4 rounded-xl font-semibold text-sm bg-white/10 hover:bg-white/15 text-white border border-white/10 transition"
+                                className="py-3 px-4 rounded-xl font-semibold text-sm bg-white/10 hover:bg-white/15 text-white border border-white/10 transition cursor-pointer"
                             >
                                 Keep Pass
                             </button>
                             <button
                                 onClick={() => handleCancelConfirm(cancelModalRsvp.event?._id)}
                                 disabled={cancellingId === cancelModalRsvp.event?._id}
-                                className="py-3 px-4 rounded-xl font-semibold text-sm bg-rose-600 hover:bg-rose-500 text-white shadow-lg shadow-rose-600/20 transition disabled:opacity-50"
+                                className="py-3 px-4 rounded-xl font-semibold text-sm bg-rose-600 hover:bg-rose-500 text-white shadow-lg shadow-rose-600/25 transition disabled:opacity-50 cursor-pointer"
                             >
                                 {cancellingId === cancelModalRsvp.event?._id ? "Cancelling…" : "Yes, Cancel RSVP"}
                             </button>

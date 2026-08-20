@@ -25,13 +25,13 @@ export default function QRPassModal({ rsvp, event, user, onClose }) {
     }
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
-            <div className="relative w-full max-w-md bg-[#111827] border border-white/15 rounded-3xl shadow-2xl overflow-hidden text-white animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-xl animate-in fade-in duration-200">
+            <div className={`relative w-full max-w-md bg-[#0c101a] border border-white/15 rounded-3xl shadow-2xl overflow-hidden text-white animate-in zoom-in-95 duration-200 ${category.glowClass}`}>
                 
                 {/* Close Button */}
                 <button
                     onClick={onClose}
-                    className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/40 hover:bg-white/20 border border-white/10 text-slate-300 hover:text-white transition"
+                    className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/50 hover:bg-white/20 border border-white/10 text-slate-300 hover:text-white transition cursor-pointer"
                     aria-label="Close pass modal"
                 >
                     <X className="w-4 h-4" />
@@ -64,7 +64,7 @@ export default function QRPassModal({ rsvp, event, user, onClose }) {
                 <div className="p-6 space-y-6">
                     
                     {/* Key Metrics Strip */}
-                    <div className="grid grid-cols-2 gap-3 p-3.5 rounded-2xl bg-[#090d16]/80 border border-white/10 text-xs">
+                    <div className="grid grid-cols-2 gap-3 p-3.5 rounded-2xl bg-[#06080e] border border-white/10 text-xs">
                         <div>
                             <span className="font-mono text-[10px] text-slate-400 uppercase">Attendee Name</span>
                             <p className="font-bold text-white mt-0.5 truncate">{attendeeName}</p>
@@ -149,7 +149,7 @@ export default function QRPassModal({ rsvp, event, user, onClose }) {
                     <div className="grid grid-cols-2 gap-3 pt-2">
                         <button
                             onClick={() => downloadCalendarEvent(targetEvent)}
-                            className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-semibold bg-white/10 hover:bg-white/15 text-white border border-white/10 transition"
+                            className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-semibold bg-white/10 hover:bg-white/15 text-white border border-white/10 transition cursor-pointer"
                         >
                             <Calendar className="w-4 h-4 text-amber-400" />
                             <span>Add to Cal (.ics)</span>
@@ -157,7 +157,7 @@ export default function QRPassModal({ rsvp, event, user, onClose }) {
 
                         <button
                             onClick={handlePrint}
-                            className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-semibold bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 shadow-md font-sans transition"
+                            className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-semibold bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 shadow-md font-sans transition cursor-pointer"
                         >
                             <Printer className="w-4 h-4" />
                             <span>Print / Save Pass</span>
@@ -166,7 +166,7 @@ export default function QRPassModal({ rsvp, event, user, onClose }) {
                 </div>
 
                 {/* Scalloped Perforation Footer */}
-                <div className="px-6 py-3 bg-[#090d16] border-t border-white/10 text-center">
+                <div className="px-6 py-3 bg-[#06080e] border-t border-white/10 text-center">
                     <span className="text-[10px] font-mono text-slate-400 tracking-wider">
                         EVENTHUB DIGITAL PASS ENGINE • NON-TRANSFERABLE
                     </span>

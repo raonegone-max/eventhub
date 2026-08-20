@@ -3,18 +3,19 @@ import { Ticket, Sparkles, Heart, Compass, ShieldCheck } from "lucide-react"
 
 export default function Footer() {
     return (
-        <footer className="w-full border-t border-white/10 bg-[#080c14] text-slate-400 mt-auto">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <footer className="w-full border-t border-white/[0.08] bg-[#05070c] text-slate-400 mt-auto relative overflow-hidden">
+            <div className="absolute inset-0 bg-dark-grid opacity-20 pointer-events-none" />
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8 lg:gap-12">
                     
                     {/* Brand Column */}
                     <div className="md:col-span-2 space-y-4">
-                        <Link to="/" className="flex items-center gap-2.5 inline-flex focus:outline-none">
-                            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-amber-400 to-orange-500 text-slate-950 shadow-md shadow-amber-500/20">
+                        <Link to="/" className="flex items-center gap-2.5 inline-flex focus:outline-none group">
+                            <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 text-slate-950 shadow-md shadow-amber-500/20 group-hover:scale-105 transition-transform">
                                 <Ticket className="w-4 h-4" />
                             </div>
                             <span className="font-extrabold text-xl tracking-tight text-white font-sans">
-                                Event<span className="text-amber-400">Hub</span>
+                                Event<span className="gradient-text-amber">Hub</span>
                             </span>
                         </Link>
                         
@@ -22,7 +23,7 @@ export default function Footer() {
                             The pulse of campus life. Discover hackathons, cultural fests, sports tourneys, and club gatherings with instant digital ticket passes.
                         </p>
 
-                        <div className="flex items-center gap-2.5 text-xs font-mono text-emerald-400 bg-emerald-950/40 border border-emerald-800/40 px-3 py-1.5 rounded-full w-fit">
+                        <div className="flex items-center gap-2.5 text-xs font-mono text-emerald-400 bg-emerald-950/40 border border-emerald-800/40 px-3.5 py-1.5 rounded-full w-fit">
                             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                             <span>Campus Network Active · Real-time RSVPs</span>
                         </div>
@@ -40,18 +41,18 @@ export default function Footer() {
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/events" className="hover:text-amber-400 transition">
-                                    Tech & Hackathons
+                                <Link to="/events?search=hackathon" className="hover:text-amber-400 transition">
+                                    Tech &amp; Hackathons
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/events" className="hover:text-amber-400 transition">
-                                    Music & Cultural Fests
+                                <Link to="/events?search=music" className="hover:text-amber-400 transition">
+                                    Music &amp; Cultural Fests
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/events" className="hover:text-amber-400 transition">
-                                    Workshops & Seminars
+                                <Link to="/events?search=workshop" className="hover:text-amber-400 transition">
+                                    Workshops &amp; Seminars
                                 </Link>
                             </li>
                         </ul>

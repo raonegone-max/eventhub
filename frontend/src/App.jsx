@@ -14,7 +14,7 @@ import ProtectedRoute from "./api/ProtectedRoute"
 
 export default function App() {
     return (
-        <div className="min-h-screen flex flex-col bg-[#0b0f17] bg-ambient-mesh bg-grid-pattern text-slate-100 font-sans selection:bg-amber-500 selection:text-slate-950">
+        <div className="min-h-screen flex flex-col bg-[#06080e] bg-ambient-mesh bg-dark-grid text-slate-100 font-sans selection:bg-amber-500 selection:text-slate-950">
             <Navbar />
             <main className="flex-1 w-full">
                 <Routes>

@@ -5,29 +5,32 @@ export const EVENT_CATEGORIES = [
         label: "All Gatherings",
         icon: "✨",
         color: "amber",
-        glowClass: "glow-bottom-amber",
+        glowClass: "neon-glow-amber",
         badge: "bg-amber-400/10 text-amber-300 border-amber-400/20",
-        accent: "#ff6b00"
+        accent: "#ff6b2b",
+        bg: "from-amber-500/20 via-orange-500/10 to-transparent"
     },
     {
         id: "tech",
         label: "Tech & Hackathons",
         icon: "💻",
-        keywords: ["hackathon", "tech", "code", "coding", "ai", "web", "developer", "cyber", "robotics", "dev", "data", "cloud"],
+        keywords: ["hackathon", "tech", "code", "coding", "ai", "web", "developer", "cyber", "robotics", "dev", "data", "cloud", "software"],
         color: "blue",
-        glowClass: "glow-bottom-blue",
+        glowClass: "neon-glow-blue",
         badge: "bg-blue-400/10 text-blue-300 border-blue-400/20",
-        accent: "#0070f3"
+        accent: "#3b82f6",
+        bg: "from-blue-500/20 via-cyan-500/10 to-transparent"
     },
     {
         id: "cultural",
         label: "Music & Cultural",
         icon: "🎵",
-        keywords: ["music", "concert", "fest", "cultural", "dance", "dj", "night", "gala", "band", "singing", "drama", "theatre", "art"],
+        keywords: ["music", "concert", "fest", "cultural", "dance", "dj", "night", "gala", "band", "singing", "drama", "theatre", "art", "comedy"],
         color: "rose",
-        glowClass: "glow-bottom-rose",
+        glowClass: "neon-glow-rose",
         badge: "bg-rose-400/10 text-rose-300 border-rose-400/20",
-        accent: "#f43f5e"
+        accent: "#f43f5e",
+        bg: "from-rose-500/20 via-pink-500/10 to-transparent"
     },
     {
         id: "workshop",
@@ -35,9 +38,10 @@ export const EVENT_CATEGORIES = [
         icon: "💡",
         keywords: ["workshop", "talk", "seminar", "speaker", "career", "bootcamp", "class", "masterclass", "lecture", "summit", "finance", "design"],
         color: "emerald",
-        glowClass: "glow-bottom-emerald",
+        glowClass: "neon-glow-emerald",
         badge: "bg-emerald-400/10 text-emerald-300 border-emerald-400/20",
-        accent: "#00e676"
+        accent: "#10b981",
+        bg: "from-emerald-500/20 via-teal-500/10 to-transparent"
     },
     {
         id: "sports",
@@ -45,19 +49,21 @@ export const EVENT_CATEGORIES = [
         icon: "🏆",
         keywords: ["sports", "game", "gaming", "esports", "football", "cricket", "tournament", "chess", "badminton", "basketball", "athletics", "fifa", "valorant"],
         color: "amber",
-        glowClass: "glow-bottom-amber",
+        glowClass: "neon-glow-amber",
         badge: "bg-amber-400/10 text-amber-300 border-amber-400/20",
-        accent: "#ff6b00"
+        accent: "#ff6b2b",
+        bg: "from-amber-500/20 via-orange-500/10 to-transparent"
     },
     {
         id: "social",
         label: "Social & Clubs",
         icon: "🤝",
-        keywords: ["meetup", "social", "club", "party", "freshers", "gathering", "fair", "orientation", "mixer", "alumni"],
+        keywords: ["meetup", "social", "club", "party", "freshers", "gathering", "fair", "orientation", "mixer", "alumni", "society"],
         color: "purple",
-        glowClass: "glow-bottom-purple",
+        glowClass: "neon-glow-purple",
         badge: "bg-purple-400/10 text-purple-300 border-purple-400/20",
-        accent: "#8b5cf6"
+        accent: "#a855f7",
+        bg: "from-purple-500/20 via-indigo-500/10 to-transparent"
     }
 ]
 

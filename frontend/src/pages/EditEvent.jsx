@@ -106,7 +106,7 @@ export default function EditEvent() {
             <div className="flex items-center justify-between pb-6 mb-8 border-b border-white/10">
                 <Link
                     to={`/events/${id}`}
-                    className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-amber-400 transition"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-white transition"
                 >
                     <ArrowLeft className="w-4 h-4" />
                     <span>Cancel Editing</span>
@@ -120,13 +120,13 @@ export default function EditEvent() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
                 
                 {/* Left Column: Form */}
-                <div className="lg:col-span-7 p-6 sm:p-8 rounded-3xl bg-[#141b2b]/90 border border-white/10 backdrop-blur-xl shadow-2xl space-y-6">
+                <div className="lg:col-span-7 p-6 sm:p-8 rounded-3xl bg-[#0c101a]/90 border border-white/10 backdrop-blur-2xl shadow-2xl space-y-6">
                     <div>
-                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-indigo-400/10 text-indigo-300 border border-indigo-400/20 mb-2">
-                            <Edit3 className="w-3 h-3 text-indigo-400" />
+                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-blue-400/10 text-blue-300 border border-blue-400/20 mb-2">
+                            <Edit3 className="w-3 h-3 text-blue-400" />
                             <span>UPDATE EVENT PASS</span>
                         </div>
-                        <h1 className="text-2xl sm:text-3xl font-extrabold text-white font-sans">
+                        <h1 className="text-2xl sm:text-3xl font-extrabold text-white font-sans tracking-tight">
                             Edit Event Details
                         </h1>
                         <p className="text-slate-400 text-sm mt-1">
@@ -135,7 +135,7 @@ export default function EditEvent() {
                     </div>
 
                     {error && (
-                        <div className="p-4 rounded-xl bg-rose-950/60 border border-rose-800 text-rose-300 text-xs font-mono flex items-start gap-2.5">
+                        <div className="p-4 rounded-2xl bg-rose-950/60 border border-rose-800 text-rose-300 text-xs font-mono flex items-start gap-2.5">
                             <AlertCircle className="w-4 h-4 shrink-0 text-rose-400 mt-0.5" />
                             <span>{error}</span>
                         </div>
@@ -154,7 +154,7 @@ export default function EditEvent() {
                                     type="text"
                                     value={title}
                                     onChange={(e) => setTitle(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#0e1422] border border-white/10 text-white text-sm focus:outline-none focus:border-amber-400/60 transition"
+                                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#06080e] border border-white/10 text-white text-sm focus:outline-none focus:border-amber-400/60 transition"
                                     required
                                 />
                             </div>
@@ -171,7 +171,7 @@ export default function EditEvent() {
                                     value={description}
                                     onChange={(e) => setDescription(e.target.value)}
                                     rows={4}
-                                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#0e1422] border border-white/10 text-white text-sm focus:outline-none focus:border-amber-400/60 transition resize-none leading-relaxed"
+                                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#06080e] border border-white/10 text-white text-sm focus:outline-none focus:border-amber-400/60 transition resize-none leading-relaxed"
                                     required
                                 />
                             </div>
@@ -189,7 +189,7 @@ export default function EditEvent() {
                                         type="date"
                                         value={date}
                                         onChange={(e) => setDate(e.target.value)}
-                                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#0e1422] border border-white/10 text-white text-sm focus:outline-none focus:border-amber-400/60 transition [color-scheme:dark]"
+                                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#06080e] border border-white/10 text-white text-sm focus:outline-none focus:border-amber-400/60 transition [color-scheme:dark]"
                                         required
                                     />
                                 </div>
@@ -205,7 +205,7 @@ export default function EditEvent() {
                                         type="text"
                                         value={location}
                                         onChange={(e) => setLocation(e.target.value)}
-                                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#0e1422] border border-white/10 text-white text-sm focus:outline-none focus:border-amber-400/60 transition"
+                                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#06080e] border border-white/10 text-white text-sm focus:outline-none focus:border-amber-400/60 transition"
                                         required
                                     />
                                 </div>
@@ -225,7 +225,7 @@ export default function EditEvent() {
                                     value={capacity}
                                     onChange={(e) => setCapacity(e.target.value)}
                                     min="1"
-                                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#0e1422] border border-white/10 text-white text-sm focus:outline-none focus:border-amber-400/60 transition"
+                                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#06080e] border border-white/10 text-white text-sm focus:outline-none focus:border-amber-400/60 transition"
                                 />
                             </div>
                         </div>
@@ -235,7 +235,7 @@ export default function EditEvent() {
                             <button
                                 type="submit"
                                 disabled={submitting}
-                                className="flex-1 py-3.5 px-6 rounded-2xl font-bold text-sm bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 shadow-xl shadow-amber-500/20 transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50 flex items-center justify-center gap-2"
+                                className="flex-1 py-3.5 px-6 rounded-2xl font-bold text-sm bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 shadow-xl shadow-amber-500/25 transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
                             >
                                 <Save className="w-4 h-4" />
                                 <span>{submitting ? "SAVING CHANGES…" : "SAVE CHANGES"}</span>
@@ -257,7 +257,7 @@ export default function EditEvent() {
                         <span>LIVE TICKET PASS PREVIEW</span>
                     </div>
 
-                    <div className="p-4 rounded-3xl bg-[#101624]/60 border border-white/10 shadow-xl">
+                    <div className="p-4 rounded-3xl bg-[#0c101a]/80 border border-white/10 shadow-2xl">
                         <TicketCard event={previewEvent} />
                     </div>
                 </div>

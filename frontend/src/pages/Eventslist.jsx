@@ -124,7 +124,7 @@ export default function EventsList() {
                 {isOrganizer && (
                     <Link
                         to="/events/create"
-                        className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-sm bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 shadow-lg shadow-amber-500/20 transition self-start md:self-auto shrink-0"
+                        className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-sm bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 shadow-lg shadow-amber-500/20 transition self-start md:self-auto shrink-0 cursor-pointer"
                     >
                         <Plus className="w-4 h-4 stroke-[2.5]" />
                         <span>Host New Event</span>
@@ -144,12 +144,12 @@ export default function EventsList() {
                             placeholder="Filter by title, venue, or host..."
                             value={searchTerm}
                             onChange={handleSearchChange}
-                            className="w-full pl-10 pr-10 py-3 rounded-xl bg-[#141b2b] border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400/60 transition shadow-inner"
+                            className="w-full pl-10 pr-10 py-3 rounded-xl bg-[#0c101a] border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400/60 focus:shadow-[0_0_20px_rgba(255,107,43,0.15)] transition shadow-inner"
                         />
                         {searchTerm && (
                             <button
                                 onClick={clearSearch}
-                                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-md text-slate-400 hover:text-white"
+                                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-md text-slate-400 hover:text-white cursor-pointer"
                             >
                                 <X className="w-4 h-4" />
                             </button>
@@ -157,12 +157,12 @@ export default function EventsList() {
                     </div>
 
                     {/* Time Filter Tabs */}
-                    <div className="md:col-span-4 flex items-center bg-[#141b2b] p-1 rounded-xl border border-white/10">
+                    <div className="md:col-span-4 flex items-center bg-[#0c101a] p-1 rounded-xl border border-white/10">
                         <button
                             onClick={() => setSelectedTab("all")}
-                            className={`flex-1 py-2 text-xs font-semibold rounded-lg transition ${
+                            className={`flex-1 py-2 text-xs font-semibold rounded-lg transition cursor-pointer ${
                                 selectedTab === "all"
-                                    ? "bg-amber-500 text-slate-950 shadow-sm"
+                                    ? "bg-white/15 text-white shadow-sm"
                                     : "text-slate-400 hover:text-white"
                             }`}
                         >
@@ -170,9 +170,9 @@ export default function EventsList() {
                         </button>
                         <button
                             onClick={() => setSelectedTab("upcoming")}
-                            className={`flex-1 py-2 text-xs font-semibold rounded-lg transition ${
+                            className={`flex-1 py-2 text-xs font-semibold rounded-lg transition cursor-pointer ${
                                 selectedTab === "upcoming"
-                                    ? "bg-amber-500 text-slate-950 shadow-sm"
+                                    ? "bg-white/15 text-white shadow-sm"
                                     : "text-slate-400 hover:text-white"
                             }`}
                         >
@@ -180,9 +180,9 @@ export default function EventsList() {
                         </button>
                         <button
                             onClick={() => setSelectedTab("today")}
-                            className={`flex-1 py-2 text-xs font-semibold rounded-lg transition ${
+                            className={`flex-1 py-2 text-xs font-semibold rounded-lg transition cursor-pointer ${
                                 selectedTab === "today"
-                                    ? "bg-amber-500 text-slate-950 shadow-sm"
+                                    ? "bg-white/15 text-white shadow-sm"
                                     : "text-slate-400 hover:text-white"
                             }`}
                         >
@@ -195,7 +195,7 @@ export default function EventsList() {
                         <select
                             value={sortBy}
                             onChange={(e) => setSortBy(e.target.value)}
-                            className="w-full py-3 px-3.5 rounded-xl bg-[#141b2b] border border-white/10 text-slate-300 text-xs font-medium focus:outline-none focus:border-amber-400/60 transition cursor-pointer appearance-none"
+                            className="w-full py-3 px-3.5 rounded-xl bg-[#0c101a] border border-white/10 text-slate-300 text-xs font-medium focus:outline-none focus:border-amber-400/60 transition cursor-pointer appearance-none"
                         >
                             <option value="soonest">Sort: Soonest</option>
                             <option value="latest">Sort: Latest</option>
@@ -216,7 +216,7 @@ export default function EventsList() {
                                 clearSearch()
                                 setSelectedTab("all")
                             }}
-                            className="text-amber-400 hover:underline flex items-center gap-1"
+                            className="text-amber-400 hover:underline flex items-center gap-1 cursor-pointer"
                         >
                             Reset filters
                         </button>
@@ -231,7 +231,7 @@ export default function EventsList() {
                         {[1, 2, 3, 4, 5, 6].map((i) => (
                             <div
                                 key={i}
-                                className="h-44 rounded-2xl bg-[#131b2c]/50 animate-pulse border border-white/5"
+                                className="h-44 rounded-3xl bg-[#0c101a]/50 animate-pulse border border-white/5"
                             />
                         ))}
                     </div>
@@ -242,7 +242,7 @@ export default function EventsList() {
                         ))}
                     </div>
                 ) : (
-                    <div className="text-center py-20 bg-white/[0.02] border border-white/5 rounded-3xl p-8 max-w-lg mx-auto">
+                    <div className="text-center py-20 bg-[#0c101a]/60 border border-white/5 rounded-3xl p-8 max-w-lg mx-auto">
                         <div className="w-16 h-16 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center mx-auto mb-4">
                             <Search className="w-8 h-8" />
                         </div>
@@ -256,7 +256,7 @@ export default function EventsList() {
                                     clearSearch()
                                     setSelectedTab("all")
                                 }}
-                                className="px-4 py-2 rounded-xl text-xs font-semibold bg-white/10 hover:bg-white/15 text-white border border-white/10"
+                                className="px-4 py-2 rounded-xl text-xs font-semibold bg-white/10 hover:bg-white/15 text-white border border-white/10 cursor-pointer"
                             >
                                 Clear Filters
                             </button>

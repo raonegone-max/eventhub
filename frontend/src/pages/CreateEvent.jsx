@@ -75,7 +75,7 @@ export default function CreateEvent() {
             <div className="flex items-center justify-between pb-6 mb-8 border-b border-white/10">
                 <Link
                     to="/events"
-                    className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-amber-400 transition"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-white transition"
                 >
                     <ArrowLeft className="w-4 h-4" />
                     <span>Back to Events Feed</span>
@@ -89,13 +89,13 @@ export default function CreateEvent() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
                 
                 {/* Left Column: Form */}
-                <div className="lg:col-span-7 p-6 sm:p-8 rounded-3xl bg-[#141b2b]/90 border border-white/10 backdrop-blur-xl shadow-2xl space-y-6">
+                <div className="lg:col-span-7 p-6 sm:p-8 rounded-3xl bg-[#0c101a]/90 border border-white/10 backdrop-blur-2xl shadow-2xl space-y-6">
                     <div>
                         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-amber-400/10 text-amber-300 border border-amber-400/20 mb-2">
                             <Sparkles className="w-3 h-3 text-amber-400" />
                             <span>NEW GATHERING</span>
                         </div>
-                        <h1 className="text-2xl sm:text-3xl font-extrabold text-white font-sans">
+                        <h1 className="text-2xl sm:text-3xl font-extrabold text-white font-sans tracking-tight">
                             Host a Campus Event
                         </h1>
                         <p className="text-slate-400 text-sm mt-1">
@@ -104,7 +104,7 @@ export default function CreateEvent() {
                     </div>
 
                     {error && (
-                        <div className="p-4 rounded-xl bg-rose-950/60 border border-rose-800 text-rose-300 text-xs font-mono flex items-start gap-2.5">
+                        <div className="p-4 rounded-2xl bg-rose-950/60 border border-rose-800 text-rose-300 text-xs font-mono flex items-start gap-2.5">
                             <AlertCircle className="w-4 h-4 shrink-0 text-rose-400 mt-0.5" />
                             <span>{error}</span>
                         </div>
@@ -124,7 +124,7 @@ export default function CreateEvent() {
                                     placeholder="e.g. Annual Campus Hackathon 2026"
                                     value={title}
                                     onChange={(e) => setTitle(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#0e1422] border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400/60 transition"
+                                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#06080e] border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400/60 focus:shadow-[0_0_20px_rgba(255,107,43,0.15)] transition"
                                     required
                                 />
                             </div>
@@ -142,7 +142,7 @@ export default function CreateEvent() {
                                     value={description}
                                     onChange={(e) => setDescription(e.target.value)}
                                     rows={4}
-                                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#0e1422] border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400/60 transition resize-none leading-relaxed"
+                                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#06080e] border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400/60 focus:shadow-[0_0_20px_rgba(255,107,43,0.15)] transition resize-none leading-relaxed"
                                     required
                                 />
                             </div>
@@ -160,7 +160,7 @@ export default function CreateEvent() {
                                         type="date"
                                         value={date}
                                         onChange={(e) => setDate(e.target.value)}
-                                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#0e1422] border border-white/10 text-white text-sm focus:outline-none focus:border-amber-400/60 transition [color-scheme:dark]"
+                                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#06080e] border border-white/10 text-white text-sm focus:outline-none focus:border-amber-400/60 transition [color-scheme:dark]"
                                         required
                                     />
                                 </div>
@@ -177,7 +177,7 @@ export default function CreateEvent() {
                                         placeholder="e.g. Science Block Amphitheater"
                                         value={location}
                                         onChange={(e) => setLocation(e.target.value)}
-                                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#0e1422] border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400/60 transition"
+                                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#06080e] border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400/60 transition"
                                         required
                                     />
                                 </div>
@@ -197,7 +197,7 @@ export default function CreateEvent() {
                                     value={capacity}
                                     onChange={(e) => setCapacity(e.target.value)}
                                     min="1"
-                                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#0e1422] border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400/60 transition"
+                                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#06080e] border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400/60 transition"
                                 />
                             </div>
                         </div>
@@ -207,7 +207,7 @@ export default function CreateEvent() {
                             <button
                                 type="submit"
                                 disabled={submitting}
-                                className="w-full py-3.5 px-6 rounded-2xl font-bold text-sm bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 shadow-xl shadow-amber-500/20 transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50 flex items-center justify-center gap-2"
+                                className="w-full py-3.5 px-6 rounded-2xl font-bold text-sm bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 shadow-xl shadow-amber-500/25 transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
                             >
                                 <Plus className="w-4 h-4 stroke-[2.5]" />
                                 <span>{submitting ? "PUBLISHING EVENT…" : "PUBLISH CAMPUS EVENT"}</span>
@@ -223,7 +223,7 @@ export default function CreateEvent() {
                         <span>LIVE TICKET PASS PREVIEW</span>
                     </div>
 
-                    <div className="p-4 rounded-3xl bg-[#101624]/60 border border-white/10 shadow-xl">
+                    <div className="p-4 rounded-3xl bg-[#0c101a]/80 border border-white/10 shadow-2xl">
                         <TicketCard event={previewEvent} />
                         <p className="text-[11px] font-mono text-slate-500 text-center mt-3">
                             This is how your event pass appears in the campus discovery feed.

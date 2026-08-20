@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { useParams, useNavigate, Link } from "react-router-dom"
 import { getEventById, createRSVP, deleteEvent } from "../api/axios"
 import { useAuth } from "../api/AuthContext"
+import { getEventCategory } from "../utils/eventTheme"
 import {
     Calendar,
     MapPin,
@@ -125,6 +126,7 @@ export default function EventDetail() {
         )
     }
 
+    const category = getEventCategory(event)
     const isOwner = isLoggedIn && (user?.id === event.organizer?._id || user?._id === event.organizer?._id)
     const dateObj = new Date(event.date)
     const isValidDate = !isNaN(dateObj.getTime())
@@ -140,7 +142,7 @@ export default function EventDetail() {
             <div className="flex items-center justify-between gap-4 pb-6 mb-8 border-b border-white/10">
                 <Link
                     to="/events"
-                    className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-amber-400 transition"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-white transition"
                 >
                     <ArrowLeft className="w-4 h-4" />
                     <span>Back to Events Feed</span>
@@ -149,7 +151,7 @@ export default function EventDetail() {
                 <div className="flex items-center gap-2">
                     <button
                         onClick={handleShare}
-                        className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-white/[0.06] hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition cursor-pointer"
                     >
                         {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Share2 className="w-3.5 h-3.5 text-amber-400" />}
                         <span>{copied ? "Link Copied!" : "Share Pass"}</span>
@@ -159,14 +161,14 @@ export default function EventDetail() {
                         <div className="flex items-center gap-2">
                             <Link
                                 to={`/events/${event._id}/edit`}
-                                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 transition"
+                                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-blue-500/10 hover:bg-blue-500/20 text-blue-300 border border-blue-500/30 transition"
                             >
                                 <Edit3 className="w-3.5 h-3.5" />
                                 <span>Edit</span>
                             </Link>
                             <button
                                 onClick={() => setShowDeleteModal(true)}
-                                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 transition"
+                                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 transition cursor-pointer"
                             >
                                 <Trash2 className="w-3.5 h-3.5" />
                                 <span>Delete</span>
@@ -185,12 +187,12 @@ export default function EventDetail() {
                     {/* Header Banner */}
                     <div className="space-y-4">
                         <div className="flex flex-wrap items-center gap-2">
-                            <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-400/10 text-amber-300 border border-amber-400/20">
-                                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                                <span>CAMPUS EVENT</span>
+                            <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider ${category.badge}`}>
+                                <span>{category.icon}</span>
+                                <span>{category.label}</span>
                             </span>
                             {event.capacity !== null && event.capacity !== undefined && (
-                                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-mono bg-white/5 text-slate-300 border border-white/10">
+                                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-mono bg-white/[0.05] text-slate-300 border border-white/10">
                                     <Users className="w-3.5 h-3.5" />
                                     <span>CAPACITY: {event.capacity} ATTENDEES</span>
                                 </span>
@@ -202,7 +204,7 @@ export default function EventDetail() {
                         </h1>
 
                         <div className="flex items-center gap-3 pt-2">
-                            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-500 to-indigo-500 flex items-center justify-center font-bold text-slate-950 uppercase shadow-md">
+                            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-500 to-blue-500 flex items-center justify-center font-bold text-slate-950 uppercase shadow-md">
                                 {event.organizer?.name?.[0] || "O"}
                             </div>
                             <div>
@@ -217,19 +219,19 @@ export default function EventDetail() {
                     </div>
 
                     {/* Key Info Strip */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-6 rounded-2xl bg-[#131b2c]/80 border border-white/10 backdrop-blur-md">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-6 rounded-3xl bg-[#0c101a]/90 border border-white/10 backdrop-blur-xl">
                         <div className="flex items-start gap-3">
-                            <div className="p-2.5 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20 shrink-0">
+                            <div className="p-3 rounded-2xl bg-amber-500/10 text-amber-400 border border-amber-500/20 shrink-0">
                                 <Calendar className="w-5 h-5" />
                             </div>
                             <div>
-                                <p className="text-xs font-mono text-slate-400 uppercase">Date & Time</p>
+                                <p className="text-xs font-mono text-slate-400 uppercase">Date &amp; Time</p>
                                 <p className="text-sm font-semibold text-white mt-0.5">{fullDateStr}</p>
                             </div>
                         </div>
 
                         <div className="flex items-start gap-3">
-                            <div className="p-2.5 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 shrink-0">
+                            <div className="p-3 rounded-2xl bg-blue-500/10 text-blue-400 border border-blue-500/20 shrink-0">
                                 <MapPin className="w-5 h-5" />
                             </div>
                             <div>
@@ -244,7 +246,7 @@ export default function EventDetail() {
                         <h2 className="text-lg font-bold text-white font-sans flex items-center gap-2">
                             <span>About This Gathering</span>
                         </h2>
-                        <div className="p-6 rounded-2xl bg-[#131b2c]/40 border border-white/5 text-slate-300 text-base leading-relaxed whitespace-pre-line">
+                        <div className="p-6 rounded-3xl bg-[#0c101a]/60 border border-white/5 text-slate-300 text-base leading-relaxed whitespace-pre-line">
                             {event.description}
                         </div>
                     </div>
@@ -254,10 +256,10 @@ export default function EventDetail() {
                 <div className="lg:col-span-5 space-y-6">
                     
                     {/* VIP DIGITAL TICKET PASS */}
-                    <div className="relative rounded-3xl bg-gradient-to-b from-[#18233a] to-[#121826] border border-white/15 p-6 sm:p-8 shadow-2xl shadow-black/40 overflow-hidden">
+                    <div className={`neon-card ${category.glowClass} p-6 sm:p-8 shadow-2xl overflow-hidden`}>
                         
-                        {/* Top Perforation Notches */}
-                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-[#0b0f17] border border-white/15 z-10" />
+                        {/* Top Perforation Notch */}
+                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-[#06080e] border border-white/15 z-10" />
 
                         <div className="text-center pb-6 border-b border-dashed border-white/20">
                             <span className="text-[10px] font-mono tracking-[0.25em] text-amber-400 uppercase font-bold">
@@ -291,7 +293,7 @@ export default function EventDetail() {
                         </div>
 
                         {/* Perforation Divider Line */}
-                        <div className="ticket-perforation-h my-2 opacity-50" />
+                        <div className="ticket-perforation-h my-2 opacity-40" />
 
                         {/* RSVP Action Trigger */}
                         <div className="pt-6 space-y-4">
@@ -300,7 +302,7 @@ export default function EventDetail() {
                                     <button
                                         onClick={handleRSVP}
                                         disabled={rsvpLoading}
-                                        className="w-full py-4 px-6 rounded-2xl font-extrabold text-sm sm:text-base bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 shadow-xl shadow-amber-500/25 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
+                                        className="w-full py-4 px-6 rounded-2xl font-extrabold text-sm sm:text-base bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 shadow-xl shadow-amber-500/25 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
                                     >
                                         <Ticket className="w-5 h-5" />
                                         <span>{rsvpLoading ? "CLAIMING PASS…" : "RSVP & GET DIGITAL PASS"}</span>
@@ -308,7 +310,7 @@ export default function EventDetail() {
 
                                     {rsvpMessage && (
                                         <div
-                                            className={`p-4 rounded-xl text-xs font-mono flex items-start gap-2.5 ${
+                                            className={`p-4 rounded-2xl text-xs font-mono flex items-start gap-2.5 ${
                                                 isSuccessRsvp
                                                     ? "bg-emerald-950/60 border border-emerald-800 text-emerald-300"
                                                     : "bg-amber-950/60 border border-amber-800 text-amber-300"
@@ -324,14 +326,14 @@ export default function EventDetail() {
                                     )}
                                 </>
                             ) : (
-                                <div className="text-center p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                                <div className="text-center p-4 rounded-2xl bg-white/[0.04] border border-white/10 space-y-3">
                                     <p className="text-xs text-slate-300">
                                         Log in to secure your spot and receive your pass barcode.
                                     </p>
                                     <Link
                                         to="/login"
                                         state={{ from: { pathname: `/events/${id}` } }}
-                                        className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-xl font-bold text-sm bg-amber-500 text-slate-950 shadow-md transition hover:bg-amber-400"
+                                        className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-bold text-sm bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 text-slate-950 shadow-md transition"
                                     >
                                         <span>Sign In to RSVP</span>
                                     </Link>
@@ -356,15 +358,15 @@ export default function EventDetail() {
                         </div>
 
                         {/* Bottom Perforation Notch */}
-                        <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-[#0b0f17] border border-white/15 z-10" />
+                        <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-[#06080e] border border-white/15 z-10" />
                     </div>
                 </div>
             </div>
 
             {/* Custom Delete Confirmation Modal */}
             {showDeleteModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-                    <div className="max-w-md w-full p-6 sm:p-8 rounded-3xl bg-[#161f30] border border-white/15 shadow-2xl text-center space-y-4">
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-xl animate-in fade-in duration-200">
+                    <div className="max-w-md w-full p-6 sm:p-8 rounded-3xl bg-[#0c101a] border border-white/15 shadow-2xl text-center space-y-4 neon-glow-rose">
                         <div className="w-14 h-14 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-400 flex items-center justify-center mx-auto">
                             <Trash2 className="w-7 h-7" />
                         </div>
@@ -376,14 +378,14 @@ export default function EventDetail() {
                             <button
                                 onClick={() => setShowDeleteModal(false)}
                                 disabled={deleting}
-                                className="py-3 px-4 rounded-xl font-semibold text-sm bg-white/10 hover:bg-white/15 text-white border border-white/10 transition"
+                                className="py-3 px-4 rounded-xl font-semibold text-sm bg-white/10 hover:bg-white/15 text-white border border-white/10 transition cursor-pointer"
                             >
                                 Cancel
                             </button>
                             <button
                                 onClick={handleDeleteConfirm}
                                 disabled={deleting}
-                                className="py-3 px-4 rounded-xl font-semibold text-sm bg-rose-600 hover:bg-rose-500 text-white shadow-lg shadow-rose-600/20 transition disabled:opacity-50"
+                                className="py-3 px-4 rounded-xl font-semibold text-sm bg-rose-600 hover:bg-rose-500 text-white shadow-lg shadow-rose-600/25 transition disabled:opacity-50 cursor-pointer"
                             >
                                 {deleting ? "Deleting…" : "Yes, Delete"}
                             </button>

@@ -7,7 +7,7 @@ const app = express();
 // Render's dashboard for production (your real Vercel URL) — this way the
 // same code works in both places without editing anything by hand
 app.use(cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+    origin: process.env.FRONTEND_URL || 'http://localhost:5174',
     credentials: true
 }))
 app.use(express.json());
