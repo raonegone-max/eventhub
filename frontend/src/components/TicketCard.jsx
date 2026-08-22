@@ -16,10 +16,10 @@ export default function TicketCard({ event, compact = false }) {
     return (
         <Link
             to={`/events/${event._id || event.id}`}
-            className={`neon-card ${category.glowClass} group relative flex flex-col sm:flex-row min-h-[170px] overflow-hidden transition-all duration-300`}
+            className={`neon-card ${category.glowClass} group relative flex flex-col sm:flex-row min-h-42.5 overflow-hidden transition-all duration-300`}
         >
             {/* Left Date Stub */}
-            <div className="relative flex sm:flex-col items-center justify-between sm:justify-center p-4 sm:p-6 bg-gradient-to-br from-white/[0.04] to-transparent sm:w-32 shrink-0 border-b sm:border-b-0 sm:border-r border-white/10 group-hover:from-white/[0.07] transition-colors">
+            <div className="relative flex sm:flex-col items-center justify-between sm:justify-center p-4 sm:p-6 bg-linear-to-br from-white/4 to-transparent sm:w-32 shrink-0 border-b sm:border-b-0 sm:border-r border-white/10 group-hover:from-white/[0.07] transition-colors">
                 <div className="flex sm:flex-col items-center gap-2 sm:gap-0 text-center">
                     <span className="text-[11px] font-mono font-bold tracking-widest text-slate-300 group-hover:text-white transition-colors">
                         {weekday}
@@ -32,7 +32,7 @@ export default function TicketCard({ event, compact = false }) {
                     </span>
                 </div>
 
-                <div className="sm:mt-3 px-2.5 py-0.5 rounded-full bg-white/[0.06] border border-white/10 text-[10px] font-mono text-slate-300">
+                <div className="sm:mt-3 px-2.5 py-0.5 rounded-full bg-white/6 border border-white/10 text-[10px] font-mono text-slate-300">
                     {timeStr || "ALL DAY"}
                 </div>
 
@@ -91,7 +91,7 @@ export default function TicketCard({ event, compact = false }) {
                         <div className="w-5 h-5 rounded-full bg-slate-800 border border-white/10 flex items-center justify-center text-[10px] font-bold text-white">
                             {event.organizer?.name?.[0] || "H"}
                         </div>
-                        <span className="truncate max-w-[140px] font-medium text-slate-300">
+                        <span className="truncate max-w-35 font-medium text-slate-300">
                             {event.organizer?.name || "Campus Host"}
                         </span>
                     </div>

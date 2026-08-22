@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
+import { QRCodeSVG } from "qrcode.react"
 import { getMyRSVPs, cancelRSVP } from "../api/axios"
 import {
     Ticket,
@@ -10,7 +11,8 @@ import {
     Sparkles,
     CheckCircle2,
     XCircle,
-    QrCode
+    QrCode,
+    X
 } from "lucide-react"
 
 export default function MyRSVPs() {
@@ -18,6 +20,7 @@ export default function MyRSVPs() {
     const [loading, setLoading] = useState(true)
     const [cancellingId, setCancellingId] = useState(null)
     const [cancelModalRsvp, setCancelModalRsvp] = useState(null)
+    const [qrModalRsvp, setQrModalRsvp] = useState(null)
 
     useEffect(() => {
         async function loadRSVPs() {
@@ -180,12 +183,22 @@ export default function MyRSVPs() {
                                                 <ArrowRight className="w-3.5 h-3.5" />
                                             </Link>
 
-                                            <button
-                                                onClick={() => setCancelModalRsvp(rsvp)}
-                                                className="text-xs font-mono text-rose-400 hover:underline cursor-pointer"
-                                            >
-                                                Cancel RSVP
-                                            </button>
+                                            <div className="flex items-center gap-4">
+                                                <button
+                                                    onClick={() => setQrModalRsvp(rsvp)}
+                                                    className="inline-flex items-center gap-1 text-xs font-semibold text-indigo-400 hover:text-indigo-300 transition cursor-pointer"
+                                                >
+                                                    <QrCode className="w-3.5 h-3.5" />
+                                                    <span>Show QR</span>
+                                                </button>
+
+                                                <button
+                                                    onClick={() => setCancelModalRsvp(rsvp)}
+                                                    className="text-xs font-mono text-rose-400 hover:underline cursor-pointer"
+                                                >
+                                                    Cancel RSVP
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -194,6 +207,41 @@ export default function MyRSVPs() {
                     </div>
                 )}
             </div>
+
+            {/* QR Pass Modal */}
+            {qrModalRsvp && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-xl animate-in fade-in duration-200">
+                    <div className="relative max-w-sm w-full p-6 sm:p-8 rounded-3xl bg-[#0c101a] border border-white/15 shadow-2xl text-center space-y-4 neon-glow-blue">
+                        <button
+                            onClick={() => setQrModalRsvp(null)}
+                            className="absolute top-4 right-4 text-slate-400 hover:text-white cursor-pointer"
+                        >
+                            <X className="w-5 h-5" />
+                        </button>
+
+                        <div className="w-14 h-14 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center mx-auto">
+                            <QrCode className="w-7 h-7" />
+                        </div>
+
+                        <h3 className="text-xl font-bold text-white font-sans">
+                            {qrModalRsvp.event?.title}
+                        </h3>
+                        <p className="text-slate-400 text-xs">
+                            Show this to the organizer at the door for entry.
+                        </p>
+
+                        {/* white background is required — QR scanners need real contrast,
+                            the dark theme's colors would make this unreadable by a camera */}
+                        <div className="bg-white p-4 rounded-2xl inline-block">
+                            <QRCodeSVG value={qrModalRsvp._id} size={200} />
+                        </div>
+
+                        <p className="text-[10px] font-mono text-slate-500">
+                            PASS-{qrModalRsvp._id?.slice(-6).toUpperCase()}
+                        </p>
+                    </div>
+                </div>
+            )}
 
             {/* Custom Cancel Confirmation Modal */}
             {cancelModalRsvp && (

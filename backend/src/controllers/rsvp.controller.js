@@ -164,9 +164,67 @@ async function getEventAttendees(req, res) {
     }
 }
 
+async function checkInRSVP(req, res) {
+    try {
+        const { rsvpId } = req.params
+
+        const rsvp = await rsvpModel.findById(rsvpId).populate('event').populate('user', 'name email')
+
+        if (!rsvp) {
+            return res.status(404).json({
+                message: "This pass doesn't match any RSVP. It may be invalid or fake."
+            })
+        }
+
+        if (!rsvp.event) {
+            return res.status(404).json({
+                message: "The event for this pass no longer exists."
+            })
+        }
+
+        if (rsvp.event.organizer.toString() !== req.user.id) {
+            return res.status(403).json({
+                message: "You can only check attendees into events you organize."
+            })
+        }
+
+        if (rsvp.status !== 'going') {
+            return res.status(400).json({
+                message: `${rsvp.user.name}'s RSVP was cancelled — not valid for entry.`
+            })
+        }
+
+        if (rsvp.checkedIn) {
+            return res.status(400).json({
+                message: `${rsvp.user.name} was already checked in at ${new Date(rsvp.checkedInAt).toLocaleTimeString()}.`
+            })
+        }
+
+        rsvp.checkedIn = true
+        rsvp.checkedInAt = new Date()
+        await rsvp.save()
+
+        res.status(200).json({
+            message: `${rsvp.user.name} checked in successfully!`,
+            attendee: {
+                name: rsvp.user.name,
+                email: rsvp.user.email,
+                event: rsvp.event.title,
+                checkedInAt: rsvp.checkedInAt
+            }
+        })
+
+    } catch (err) {
+        res.status(400).json({
+            message: "This QR code isn't a valid pass."
+        })
+    }
+}
+
 module.exports = {
     createRSVP,
     cancelRSVP,
     getMyRSVPs,
-    getEventAttendees
+    getEventAttendees,
+    checkInRSVP
 }

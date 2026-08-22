@@ -3,15 +3,15 @@ import { Ticket, Sparkles, Heart, Compass, ShieldCheck } from "lucide-react"
 
 export default function Footer() {
     return (
-        <footer className="w-full border-t border-white/[0.08] bg-[#05070c] text-slate-400 mt-auto relative overflow-hidden">
+        <footer className="w-full border-t border-white/8 bg-[#05070c] text-slate-400 mt-auto relative overflow-hidden">
             <div className="absolute inset-0 bg-dark-grid opacity-20 pointer-events-none" />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8 lg:gap-12">
                     
                     {/* Brand Column */}
                     <div className="md:col-span-2 space-y-4">
-                        <Link to="/" className="flex items-center gap-2.5 inline-flex focus:outline-none group">
-                            <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 text-slate-950 shadow-md shadow-amber-500/20 group-hover:scale-105 transition-transform">
+                        <Link to="/" className="flex items-center gap-2.5 focus:outline-none group">
+                            <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-linear-to-br from-amber-400 to-orange-500 text-slate-950 shadow-md shadow-amber-500/20 group-hover:scale-105 transition-transform">
                                 <Ticket className="w-4 h-4" />
                             </div>
                             <span className="font-extrabold text-xl tracking-tight text-white font-sans">

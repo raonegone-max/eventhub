@@ -38,7 +38,7 @@ export default function QRPassModal({ rsvp, event, user, onClose }) {
                 </button>
 
                 {/* Top Holographic Strip */}
-                <div className={`relative px-6 pt-6 pb-5 bg-gradient-to-br ${category.bg} border-b border-white/10 overflow-hidden`}>
+                <div className={`relative px-6 pt-6 pb-5 bg-linear-to-br ${category.bg} border-b border-white/10 overflow-hidden`}>
                     <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-2xl pointer-events-none" />
                     
                     <div className="flex items-center gap-2 mb-2">
@@ -84,7 +84,7 @@ export default function QRPassModal({ rsvp, event, user, onClose }) {
                     {/* QR Code Container with Laser Scan Animation */}
                     <div className="relative flex flex-col items-center justify-center p-6 rounded-2xl bg-white text-slate-950 shadow-inner overflow-hidden">
                         {/* Glowing Laser Scanline */}
-                        <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-amber-500 to-transparent shadow-[0_0_12px_#f59e0b] animate-scanline pointer-events-none" />
+                        <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-transparent via-amber-500 to-transparent shadow-[0_0_12px_#f59e0b] animate-scanline pointer-events-none" />
 
                         {/* Simulated Authentic High-Res QR SVG */}
                         <svg className="w-40 h-40" viewBox="0 0 100 100" fill="currentColor">
@@ -157,7 +157,7 @@ export default function QRPassModal({ rsvp, event, user, onClose }) {
 
                         <button
                             onClick={handlePrint}
-                            className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-semibold bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 shadow-md font-sans transition cursor-pointer"
+                            className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-semibold bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 shadow-md font-sans transition cursor-pointer"
                         >
                             <Printer className="w-4 h-4" />
                             <span>Print / Save Pass</span>

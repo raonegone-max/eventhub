@@ -12,6 +12,7 @@ import {
     Check,
     Edit3,
     Trash2,
+    ScanLine,
     Sparkles,
     ShieldCheck,
     Ticket,
@@ -159,6 +160,13 @@ export default function EventDetail() {
 
                     {isOwner && (
                         <div className="flex items-center gap-2">
+                            <Link
+                                to={`/events/${event._id}/checkin`}
+                                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 transition"
+                            >
+                                <ScanLine className="w-3.5 h-3.5" />
+                                <span>Check In</span>
+                            </Link>
                             <Link
                                 to={`/events/${event._id}/edit`}
                                 className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-blue-500/10 hover:bg-blue-500/20 text-blue-300 border border-blue-500/30 transition"

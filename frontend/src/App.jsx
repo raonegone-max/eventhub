@@ -10,6 +10,7 @@ import CreateEvent from "./pages/CreateEvent"
 import EditEvent from "./pages/EditEvent"
 import MyEvents from "./pages/Myevents"
 import MyRSVPs from "./pages/Myrsvps"
+import CheckIn from "./pages/CheckIn"
 import ProtectedRoute from "./api/ProtectedRoute"
 
 export default function App() {
@@ -56,6 +57,15 @@ export default function App() {
                         element={
                             <ProtectedRoute>
                                 <MyRSVPs />
+                            </ProtectedRoute>
+                        }
+                    />
+
+                    <Route
+                        path="/events/:id/checkin"
+                        element={
+                            <ProtectedRoute requireOrganizer>
+                                <CheckIn />
                             </ProtectedRoute>
                         }
                     />

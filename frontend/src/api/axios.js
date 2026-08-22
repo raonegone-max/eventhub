@@ -141,4 +141,14 @@ export async function deleteEvent(id) {
     }
 }
 
+export async function checkInAttendee(rsvpId) {
+    try {
+        const response = await api.post(`/rsvp/checkin/${rsvpId}`)
+        return response.data
+    } catch (err) {
+        console.log(err)
+        return err.response?.data
+    }
+}
+
 export default api

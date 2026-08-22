@@ -85,7 +85,7 @@ export default function MyEvents() {
 
                 <Link
                     to="/events/create"
-                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-sm bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 shadow-lg shadow-amber-500/20 transition self-start md:self-auto shrink-0 cursor-pointer"
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-sm bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 shadow-lg shadow-amber-500/20 transition self-start md:self-auto shrink-0 cursor-pointer"
                 >
                     <Plus className="w-4 h-4 stroke-[2.5]" />
                     <span>Host New Event</span>

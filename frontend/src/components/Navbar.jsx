@@ -31,7 +31,7 @@ export default function Navbar() {
     }
 
     return (
-        <header className="sticky top-0 z-50 w-full border-b border-white/[0.08] bg-[#06080e]/85 backdrop-blur-2xl transition-all">
+        <header className="sticky top-0 z-50 w-full border-b border-white/8 bg-[#06080e]/85 backdrop-blur-2xl transition-all">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16 md:h-20">
                     
@@ -41,7 +41,7 @@ export default function Navbar() {
                         onClick={() => setMobileMenuOpen(false)}
                         className="flex items-center gap-3 group focus:outline-none"
                     >
-                        <div className="relative flex items-center justify-center w-10 h-10 rounded-2xl bg-gradient-to-br from-amber-400 via-amber-500 to-orange-500 text-slate-950 shadow-lg shadow-amber-500/20 group-hover:scale-105 group-hover:shadow-amber-500/35 transition-all duration-300">
+                        <div className="relative flex items-center justify-center w-10 h-10 rounded-2xl bg-linear-to-br from-amber-400 via-amber-500 to-orange-500 text-slate-950 shadow-lg shadow-amber-500/20 group-hover:scale-105 group-hover:shadow-amber-500/35 transition-all duration-300">
                             <Ticket className="w-5 h-5 transition-transform group-hover:rotate-12" />
                             <div className="absolute -inset-0.5 rounded-2xl bg-amber-400/30 blur-sm -z-10 group-hover:opacity-100 opacity-60 transition" />
                         </div>
@@ -103,7 +103,7 @@ export default function Navbar() {
                         {isOrganizer && (
                             <Link
                                 to="/events/create"
-                                className="flex items-center gap-2 px-4.5 py-2.2 rounded-xl text-sm font-bold bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 shadow-md shadow-amber-500/20 hover:shadow-amber-500/35 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                                className="flex items-center gap-2 px-4.5 py-2.2 rounded-xl text-sm font-bold bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 shadow-md shadow-amber-500/20 hover:shadow-amber-500/35 transition-all hover:scale-[1.02] active:scale-[0.98]"
                             >
                                 <Plus className="w-4 h-4 stroke-[2.5]" />
                                 <span>Host Event</span>
@@ -113,11 +113,11 @@ export default function Navbar() {
                         {isLoggedIn ? (
                             <div className="flex items-center gap-3 pl-3 border-l border-white/10">
                                 <div className="flex items-center gap-2.5 bg-[#0e131f] border border-white/10 py-1.5 px-3.5 rounded-full shadow-inner">
-                                    <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-blue-500 to-amber-400 flex items-center justify-center text-xs font-bold text-slate-950 uppercase shadow-sm">
+                                    <div className="w-7 h-7 rounded-full bg-linear-to-tr from-blue-500 to-amber-400 flex items-center justify-center text-xs font-bold text-slate-950 uppercase shadow-sm">
                                         {user?.name?.[0] || "U"}
                                     </div>
                                     <div className="flex flex-col text-left">
-                                        <span className="text-xs font-semibold text-white leading-tight truncate max-w-[100px]">
+                                        <span className="text-xs font-semibold text-white leading-tight truncate max-w-25">
                                             {user?.name}
                                         </span>
                                         <span className="text-[9px] font-mono tracking-wider text-amber-400 flex items-center gap-0.5">
@@ -169,7 +169,7 @@ export default function Navbar() {
                                 to="/events/create"
                                 className="p-2 rounded-xl bg-amber-500 text-slate-950"
                             >
-                                <Plus className="w-4 h-4 stroke-[3]" />
+                                <Plus className="w-4 h-4 stroke-3" />
                             </Link>
                         )}
                         <button
@@ -246,7 +246,7 @@ export default function Navbar() {
                         {isLoggedIn ? (
                             <div className="flex items-center justify-between bg-[#0e131f] p-3 rounded-2xl border border-white/10">
                                 <div className="flex items-center gap-3">
-                                    <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-500 to-amber-400 flex items-center justify-center text-sm font-bold text-slate-950 uppercase">
+                                    <div className="w-9 h-9 rounded-full bg-linear-to-tr from-blue-500 to-amber-400 flex items-center justify-center text-sm font-bold text-slate-950 uppercase">
                                         {user?.name?.[0] || "U"}
                                     </div>
                                     <div>

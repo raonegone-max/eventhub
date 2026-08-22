@@ -17,6 +17,14 @@ const rsvpSchema = new mongoose.Schema({
     enum: ['going', 'cancelled'],
     default: 'going',
   },
+  checkedIn: {
+    type: Boolean,
+    default: false,
+  },
+  checkedInAt: {
+    type: Date,
+    default: null,
+  },
 }, { timestamps: true });
 
 // Prevent the same user RSVPing to the same event twice
