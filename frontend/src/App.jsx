@@ -10,7 +10,7 @@ import CreateEvent from "./pages/CreateEvent"
 import EditEvent from "./pages/EditEvent"
 import MyEvents from "./pages/Myevents"
 import MyRSVPs from "./pages/Myrsvps"
-import CheckIn from "./pages/CheckIn"
+import CheckIn from "./pages/Checkin"
 import ProtectedRoute from "./api/ProtectedRoute"
 
 export default function App() {
