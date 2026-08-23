@@ -151,4 +151,14 @@ export async function checkInAttendee(rsvpId) {
     }
 }
 
+export async function googleAuth(credential) {
+    try {
+        const response = await api.post("/auth/google", { credential })
+        return response.data
+    } catch (err) {
+        console.log(err)
+        return err.response?.data
+    }
+}
+
 export default api

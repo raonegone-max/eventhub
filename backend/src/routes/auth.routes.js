@@ -8,6 +8,8 @@ authRouter.post("/register", authController.registerUserController)
 
 authRouter.post("/login", authController.loginUserController)
 
+authRouter.post("/google", authController.googleAuthController)
+
 authRouter.post("/logout", authController.logoutUserController)
 
 authRouter.get("/me", authUser, authController.getMeController)

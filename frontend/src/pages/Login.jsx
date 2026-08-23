@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate, useLocation, Link } from "react-router-dom"
+import { GoogleLogin } from "@react-oauth/google"
 import { useAuth } from "../api/AuthContext"
 import {
     Ticket,
@@ -19,11 +20,22 @@ export default function Login() {
     const [showPassword, setShowPassword] = useState(false)
     const [error, setError] = useState("")
     const [submitting, setSubmitting] = useState(false)
-    const { login } = useAuth()
+    const { login, loginWithGoogle } = useAuth()
     const navigate = useNavigate()
     const location = useLocation()
 
     const destination = location.state?.from?.pathname || "/"
+
+    async function handleGoogleSuccess(credentialResponse) {
+        setError("")
+        const success = await loginWithGoogle(credentialResponse.credential)
+
+        if (success) {
+            navigate(destination, { replace: true })
+        } else {
+            setError("Google sign-in failed. Please try again.")
+        }
+    }
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -136,6 +148,24 @@ export default function Login() {
                             </button>
                         </div>
                     </form>
+
+                    {/* Divider */}
+                    <div className="flex items-center gap-3">
+                        <div className="flex-1 h-px bg-white/10" />
+                        <span className="text-[10px] font-mono text-slate-500 uppercase">or</span>
+                        <div className="flex-1 h-px bg-white/10" />
+                    </div>
+
+                    {/* Google Sign-In */}
+                    <div className="flex justify-center">
+                        <GoogleLogin
+                            onSuccess={handleGoogleSuccess}
+                            onError={() => setError("Google sign-in failed. Please try again.")}
+                            theme="filled_black"
+                            shape="pill"
+                            text="signin_with"
+                        />
+                    </div>
 
                     {/* Footer */}
                     <div className="pt-4 border-t border-white/5 text-center text-xs text-slate-400">

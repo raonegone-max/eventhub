@@ -2,6 +2,9 @@ const userModel = require('../models/user.model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const tokenBlacklistModel = require("../models/blacklist.model")
+const { OAuth2Client } = require('google-auth-library')
+
+const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
 
 // in production, frontend and backend live on different domains, so the browser
 // needs explicit permission to send this cookie cross-site. locally (same-site,
@@ -158,9 +161,81 @@ async function getMeController(req, res) {
     }
 }
 
+async function googleAuthController(req, res) {
+    try {
+        const { credential } = req.body
+
+        if (!credential) {
+            return res.status(400).json({
+                message: "Missing Google credential"
+            })
+        }
+
+        // this is the critical security step — anyone could send a fake
+        // { name, email } object claiming to be from Google. verifyIdToken
+        // cryptographically confirms this token was genuinely issued by
+        // Google for OUR app (matched against GOOGLE_CLIENT_ID), not forged.
+        const ticket = await googleClient.verifyIdToken({
+            idToken: credential,
+            audience: process.env.GOOGLE_CLIENT_ID
+        })
+
+        const payload = ticket.getPayload()
+        const { sub: googleId, email, name } = payload
+
+        // find by googleId first (returning user), fall back to email
+        // (handles someone who registered normally, then later uses Google
+        // sign-in with the same email — we link the accounts instead of
+        // creating a confusing duplicate)
+        let user = await userModel.findOne({ $or: [{ googleId }, { email }] })
+
+        if (user) {
+            if (!user.googleId) {
+                user.googleId = googleId
+                await user.save()
+            }
+        } else {
+            // brand new user via Google — no password, defaults to student.
+            // they can't currently upgrade to organizer after the fact through
+            // this flow; that's a real limitation worth extending later.
+            user = await userModel.create({
+                name,
+                email,
+                googleId,
+                role: 'student'
+            })
+        }
+
+        const token = jwt.sign(
+            { id: user._id, name: user.name, role: user.role },
+            process.env.JWT_SECRET,
+            { expiresIn: "1d" }
+        )
+
+        res.cookie("token", token, cookieOptions)
+
+        res.status(200).json({
+            message: "Signed in with Google successfully",
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                role: user.role
+            }
+        })
+
+    } catch (err) {
+        console.error(err)
+        res.status(401).json({
+            message: "Google sign-in failed. Please try again."
+        })
+    }
+}
+
 module.exports = {
     registerUserController,
     loginUserController,
     logoutUserController,
-    getMeController
+    getMeController,
+    googleAuthController
 }

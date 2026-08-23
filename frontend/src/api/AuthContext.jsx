@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react"
-import api, { login as apiLogin, register as apiRegister, logout as apiLogout } from "./axios"
+import api, { login as apiLogin, register as apiRegister, logout as apiLogout, googleAuth as apiGoogleAuth } from "./axios"
 
 const AuthContext = createContext(null)
 
@@ -46,6 +46,17 @@ export function AuthProvider({ children }) {
         return false
     }
 
+    async function loginWithGoogle(credential) {
+        const data = await apiGoogleAuth(credential)
+
+        if (data && data.user) {
+            setUser(data.user)
+            return true
+        }
+
+        return false
+    }
+
     async function logout() {
         await apiLogout()
         setUser(null)
@@ -58,6 +69,7 @@ export function AuthProvider({ children }) {
         isOrganizer: user?.role === "organizer",
         login,
         register,
+        loginWithGoogle,
         logout
     }
 
