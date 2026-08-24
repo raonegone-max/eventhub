@@ -11,7 +11,8 @@ import {
     LogIn,
     ArrowRight,
     AlertCircle,
-    Sparkles
+    Sparkles,
+    GraduationCap
 } from "lucide-react"
 
 export default function Login() {
@@ -20,6 +21,10 @@ export default function Login() {
     const [showPassword, setShowPassword] = useState(false)
     const [error, setError] = useState("")
     const [submitting, setSubmitting] = useState(false)
+    // only matters the first time someone signs in with Google (i.e. account
+    // creation) — for a returning Google user the backend just keeps their
+    // existing role and ignores this
+    const [googleRole, setGoogleRole] = useState("student")
     const { login, loginWithGoogle } = useAuth()
     const navigate = useNavigate()
     const location = useLocation()
@@ -28,7 +33,7 @@ export default function Login() {
 
     async function handleGoogleSuccess(credentialResponse) {
         setError("")
-        const success = await loginWithGoogle(credentialResponse.credential)
+        const success = await loginWithGoogle(credentialResponse.credential, googleRole)
 
         if (success) {
             navigate(destination, { replace: true })
@@ -141,7 +146,7 @@ export default function Login() {
                             <button
                                 type="submit"
                                 disabled={submitting}
-                                className="w-full py-3.5 px-6 rounded-2xl font-bold text-sm bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 shadow-xl shadow-amber-500/25 transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
+                                className="w-full py-3.5 px-6 rounded-2xl font-bold text-sm bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 shadow-xl shadow-amber-500/25 transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
                             >
                                 <LogIn className="w-4 h-4 stroke-[2.5]" />
                                 <span>{submitting ? "SIGNING IN…" : "SIGN IN"}</span>
@@ -157,14 +162,49 @@ export default function Login() {
                     </div>
 
                     {/* Google Sign-In */}
-                    <div className="flex justify-center">
-                        <GoogleLogin
-                            onSuccess={handleGoogleSuccess}
-                            onError={() => setError("Google sign-in failed. Please try again.")}
-                            theme="filled_black"
-                            shape="pill"
-                            text="signin_with"
-                        />
+                    <div className="space-y-3">
+                        <div>
+                            <label className="block text-xs font-mono font-semibold text-slate-300 uppercase mb-1.5 text-center">
+                                New here? Join Google sign-in as
+                            </label>
+                            <div className="grid grid-cols-2 gap-3">
+                                <button
+                                    type="button"
+                                    onClick={() => setGoogleRole("student")}
+                                    className={`flex items-center justify-center gap-1.5 py-2.5 rounded-xl border text-xs font-semibold transition cursor-pointer ${
+                                        googleRole === "student"
+                                            ? "bg-amber-500/10 border-amber-400/60 text-amber-300 shadow-[0_0_15px_rgba(255,107,43,0.15)]"
+                                            : "bg-[#06080e] border-white/10 text-slate-400 hover:text-white hover:border-white/20"
+                                    }`}
+                                >
+                                    <GraduationCap className="w-4 h-4" />
+                                    <span>Student</span>
+                                </button>
+
+                                <button
+                                    type="button"
+                                    onClick={() => setGoogleRole("organizer")}
+                                    className={`flex items-center justify-center gap-1.5 py-2.5 rounded-xl border text-xs font-semibold transition cursor-pointer ${
+                                        googleRole === "organizer"
+                                            ? "bg-amber-500/10 border-amber-400/60 text-amber-300 shadow-[0_0_15px_rgba(255,107,43,0.15)]"
+                                            : "bg-[#06080e] border-white/10 text-slate-400 hover:text-white hover:border-white/20"
+                                    }`}
+                                >
+                                    <Sparkles className="w-4 h-4" />
+                                    <span>Organizer</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="flex justify-center">
+                            <GoogleLogin
+                                onSuccess={handleGoogleSuccess}
+                                onError={() => setError("Google sign-in failed. Please try again.")}
+                                theme="filled_black"
+                                shape="pill"
+                                text="signin_with"
+                            />
+                        </div>
                     </div>
 
                     {/* Footer */}

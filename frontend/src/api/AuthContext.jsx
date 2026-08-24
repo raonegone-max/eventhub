@@ -46,8 +46,8 @@ export function AuthProvider({ children }) {
         return false
     }
 
-    async function loginWithGoogle(credential) {
-        const data = await apiGoogleAuth(credential)
+    async function loginWithGoogle(credential, role) {
+        const data = await apiGoogleAuth(credential, role)
 
         if (data && data.user) {
             setUser(data.user)

@@ -60,17 +60,17 @@ export default function Home() {
         <div className="relative overflow-hidden">
             
             {/* Ambient Lighting Orbs */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] pointer-events-none -z-10 overflow-hidden">
-                <div className="absolute top-12 left-1/4 w-[500px] h-[500px] rounded-full bg-amber-500/10 blur-[120px] animate-pulse-glow" />
-                <div className="absolute top-24 right-1/4 w-[500px] h-[500px] rounded-full bg-blue-600/10 blur-[130px]" />
-                <div className="absolute top-72 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full bg-emerald-500/5 blur-[100px]" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-150 pointer-events-none -z-10 overflow-hidden">
+                <div className="absolute top-12 left-1/4 w-125 h-125 rounded-full bg-amber-500/10 blur-[120px] animate-pulse-glow" />
+                <div className="absolute top-24 right-1/4 w-125 h-125 rounded-full bg-blue-600/10 blur-[130px]" />
+                <div className="absolute top-72 left-1/2 -translate-x-1/2 w-150 h-75 rounded-full bg-emerald-500/5 blur-[100px]" />
             </div>
 
             {/* HERO SECTION */}
             <section className="pt-14 md:pt-24 pb-16 md:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
                 
                 {/* Top Badge */}
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-xl mb-8 hover:border-amber-400/40 transition shadow-lg shadow-black/40">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/4 border border-white/10 backdrop-blur-xl mb-8 hover:border-amber-400/40 transition shadow-lg shadow-black/40">
                     <span className="flex h-2 w-2 rounded-full bg-amber-400 animate-ping" />
                     <span className="text-xs font-mono font-medium tracking-wider text-amber-300 uppercase">
                         Campus Discovery &amp; Live Passes
@@ -106,7 +106,7 @@ export default function Home() {
                     </div>
                     <button
                         type="submit"
-                        className="w-full sm:w-auto px-7 py-3 rounded-xl font-bold text-sm bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 shadow-lg shadow-amber-500/25 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 shrink-0 cursor-pointer"
+                        className="w-full sm:w-auto px-7 py-3 rounded-xl font-bold text-sm bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 shadow-lg shadow-amber-500/25 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 shrink-0 cursor-pointer"
                     >
                         <span>Find Events</span>
                         <ArrowRight className="w-4 h-4" />
@@ -117,7 +117,7 @@ export default function Home() {
                 <div className="flex flex-wrap items-center justify-center gap-3 mt-8">
                     <Link
                         to="/events"
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold bg-white/[0.06] hover:bg-white/10 text-white border border-white/10 hover:border-amber-400/40 transition shadow-sm"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold bg-white/6 hover:bg-white/10 text-white border border-white/10 hover:border-amber-400/40 transition shadow-sm"
                     >
                         <Compass className="w-4 h-4 text-amber-400" />
                         <span>Browse All Events</span>
@@ -172,11 +172,11 @@ export default function Home() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
                     
                     {/* Card 1: Amber Neon Rim Glow */}
-                    <div className="neon-card neon-glow-amber p-8 sm:p-9 flex flex-col justify-between min-h-[340px] group">
+                    <div className="neon-card neon-glow-amber p-8 sm:p-9 flex flex-col justify-between min-h-85 group">
                         <div>
                             {/* Embossed Icon Badge */}
                             <div className="w-13 h-13 rounded-2xl squircle-icon flex items-center justify-center mb-7 text-amber-400 group-hover:scale-105 transition-transform duration-300">
-                                <Mail className="w-6 h-6 stroke-[2]" />
+                                <Mail className="w-6 h-6 stroke-2" />
                             </div>
 
                             {/* Card Title */}
@@ -203,11 +203,11 @@ export default function Home() {
                     </div>
 
                     {/* Card 2: Electric Blue Neon Rim Glow */}
-                    <div className="neon-card neon-glow-blue p-8 sm:p-9 flex flex-col justify-between min-h-[340px] group">
+                    <div className="neon-card neon-glow-blue p-8 sm:p-9 flex flex-col justify-between min-h-85 group">
                         <div>
                             {/* Embossed Icon Badge */}
                             <div className="w-13 h-13 rounded-2xl squircle-icon flex items-center justify-center mb-7 text-blue-400 group-hover:scale-105 transition-transform duration-300">
-                                <Wrench className="w-6 h-6 stroke-[2]" />
+                                <Wrench className="w-6 h-6 stroke-2" />
                             </div>
 
                             {/* Card Title */}
@@ -234,11 +234,11 @@ export default function Home() {
                     </div>
 
                     {/* Card 3: Emerald Neon Rim Glow */}
-                    <div className="neon-card neon-glow-emerald p-8 sm:p-9 flex flex-col justify-between min-h-[340px] group">
+                    <div className="neon-card neon-glow-emerald p-8 sm:p-9 flex flex-col justify-between min-h-85 group">
                         <div>
                             {/* Embossed Icon Badge */}
                             <div className="w-13 h-13 rounded-2xl squircle-icon flex items-center justify-center mb-7 text-emerald-400 group-hover:scale-105 transition-transform duration-300">
-                                <Sparkles className="w-6 h-6 stroke-[2]" />
+                                <Sparkles className="w-6 h-6 stroke-2" />
                             </div>
 
                             {/* Card Title */}
@@ -363,7 +363,7 @@ export default function Home() {
 
             {/* ORGANIZER CTA BANNER */}
             <section className="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-amber-500/15 via-blue-500/15 to-emerald-500/15 border border-white/10 p-8 sm:p-12 lg:p-16 text-center backdrop-blur-2xl shadow-2xl shadow-black/60">
+                <div className="relative overflow-hidden rounded-3xl bg-linear-to-r from-amber-500/15 via-blue-500/15 to-emerald-500/15 border border-white/10 p-8 sm:p-12 lg:p-16 text-center backdrop-blur-2xl shadow-2xl shadow-black/60">
                     <div className="absolute inset-0 bg-dark-grid opacity-30 pointer-events-none" />
                     <div className="relative z-10 max-w-2xl mx-auto space-y-4">
                         <span className="px-3.5 py-1 rounded-full text-xs font-mono font-bold bg-amber-400 text-slate-950 uppercase shadow-md shadow-amber-500/20">
@@ -379,7 +379,7 @@ export default function Home() {
                             {isOrganizer ? (
                                 <Link
                                     to="/events/create"
-                                    className="px-7 py-3.5 rounded-2xl font-bold bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 shadow-xl shadow-amber-500/25 transition-all hover:scale-[1.02] flex items-center gap-2"
+                                    className="px-7 py-3.5 rounded-2xl font-bold bg-linear-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 shadow-xl shadow-amber-500/25 transition-all hover:scale-[1.02] flex items-center gap-2"
                                 >
                                     <Plus className="w-5 h-5 stroke-[2.5]" />
                                     <span>Create Event Now</span>
@@ -387,7 +387,7 @@ export default function Home() {
                             ) : (
                                 <Link
                                     to="/register"
-                                    className="px-7 py-3.5 rounded-2xl font-bold bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 shadow-xl shadow-amber-500/25 transition-all hover:scale-[1.02] flex items-center gap-2"
+                                    className="px-7 py-3.5 rounded-2xl font-bold bg-linear-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 shadow-xl shadow-amber-500/25 transition-all hover:scale-[1.02] flex items-center gap-2"
                                 >
                                     <span>Sign Up to Host</span>
                                     <ArrowRight className="w-4 h-4" />

@@ -163,13 +163,18 @@ async function getMeController(req, res) {
 
 async function googleAuthController(req, res) {
     try {
-        const { credential } = req.body
+        const { credential, role } = req.body
 
         if (!credential) {
             return res.status(400).json({
                 message: "Missing Google credential"
             })
         }
+
+        // same whitelist as normal registration — never trust the client's
+        // role string directly, even for Google sign-in
+        const allowedRoles = ['student', 'organizer']
+        const finalRole = allowedRoles.includes(role) ? role : 'student'
 
         // this is the critical security step — anyone could send a fake
         // { name, email } object claiming to be from Google. verifyIdToken
@@ -195,14 +200,14 @@ async function googleAuthController(req, res) {
                 await user.save()
             }
         } else {
-            // brand new user via Google — no password, defaults to student.
-            // they can't currently upgrade to organizer after the fact through
-            // this flow; that's a real limitation worth extending later.
+            // brand new user via Google — role comes from the picker the
+            // frontend shows alongside the Google button, same as normal
+            // registration. existing users keep whatever role they already have.
             user = await userModel.create({
                 name,
                 email,
                 googleId,
-                role: 'student'
+                role: finalRole
             })
         }
 
