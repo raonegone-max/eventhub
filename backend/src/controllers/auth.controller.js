@@ -6,10 +6,6 @@ const { OAuth2Client } = require('google-auth-library')
 
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
 
-// in production, frontend and backend live on different domains, so the browser
-// needs explicit permission to send this cookie cross-site. locally (same-site,
-// http) these extra flags aren't needed and would actually break things — hence
-// the NODE_ENV check rather than hardcoding one behavior
 const cookieOptions = {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
@@ -175,11 +171,7 @@ async function googleAuthController(req, res) {
         // role string directly, even for Google sign-in
         const allowedRoles = ['student', 'organizer']
         const finalRole = allowedRoles.includes(role) ? role : 'student'
-
-        // this is the critical security step — anyone could send a fake
-        // { name, email } object claiming to be from Google. verifyIdToken
-        // cryptographically confirms this token was genuinely issued by
-        // Google for OUR app (matched against GOOGLE_CLIENT_ID), not forged.
+        
         const ticket = await googleClient.verifyIdToken({
             idToken: credential,
             audience: process.env.GOOGLE_CLIENT_ID
