@@ -126,12 +126,12 @@ export default function Register() {
                                 <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                                 <input
                                     type={showPassword ? "text" : "password"}
-                                    placeholder="Minimum 6 characters"
+                                    placeholder="Minimum 8 characters"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     className="w-full pl-10 pr-10 py-3 rounded-xl bg-[#06080e] border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400/60 focus:shadow-[0_0_20px_rgba(255,107,43,0.15)] transition"
                                     required
-                                    minLength={6}
+                                    minLength={8}
                                 />
                                 <button
                                     type="button"

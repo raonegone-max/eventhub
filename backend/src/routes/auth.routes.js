@@ -1,12 +1,13 @@
 const {Router} = require('express');
 const authController = require("../controllers/auth.controller")
 const { authUser } = require("../middlewares/auth.middleware");
+const { validateRegister, validateLogin } = require("../middlewares/validate.middleware");
 const authRouter = Router();
 
 
-authRouter.post("/register", authController.registerUserController)
+authRouter.post("/register", validateRegister, authController.registerUserController)
 
-authRouter.post("/login", authController.loginUserController)
+authRouter.post("/login", validateLogin, authController.loginUserController)
 
 authRouter.post("/google", authController.googleAuthController)
 

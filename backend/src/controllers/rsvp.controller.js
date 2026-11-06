@@ -5,17 +5,20 @@ async function createRSVP(req, res) {
     try {
         const { eventId } = req.body
 
-        if (!eventId) {
-            return res.status(400).json({
-                message: "Please provide eventId"
-            })
-        }
-
         const event = await eventModel.findById(eventId)
 
         if (!event) {
             return res.status(404).json({
                 message: "Event not found"
+            })
+        }
+
+        // events are stored as a bare date (midnight UTC), so give a 24h grace
+        // period — otherwise an event happening today would count as "past"
+        // from early morning onwards
+        if (event.date.getTime() < Date.now() - 24 * 60 * 60 * 1000) {
+            return res.status(400).json({
+                message: "This event has already taken place"
             })
         }
 

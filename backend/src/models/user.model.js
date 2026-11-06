@@ -10,11 +10,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
+    lowercase: true,
+    trim: true,
   },
   password: {
     type: String,
-    // password is only required for accounts created the normal way —
-    // a Google sign-in never sets a password, since Google handles that verification
     required: function () {
       return !this.googleId;
     },
@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
   googleId: {
     type: String,
     unique: true,
-    sparse: true, // sparse: lets many users have NO googleId without violating uniqueness
+    sparse: true, 
   },
   role: {
     type: String,
