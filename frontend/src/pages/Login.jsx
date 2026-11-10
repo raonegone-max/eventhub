@@ -196,6 +196,10 @@ export default function Login() {
                             </div>
                         </div>
 
+                        <p className="text-[10px] text-slate-500 text-center">
+                            Already have an account? Your role stays the same. You can switch it anytime from the menu after signing in.
+                        </p>
+
                         <div className="flex justify-center">
                             <GoogleLogin
                                 onSuccess={handleGoogleSuccess}

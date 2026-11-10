@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react"
-import api, { login as apiLogin, register as apiRegister, logout as apiLogout, googleAuth as apiGoogleAuth } from "./axios"
+import api, { login as apiLogin, register as apiRegister, logout as apiLogout, googleAuth as apiGoogleAuth, switchRole as apiSwitchRole } from "./axios"
 
 const AuthContext = createContext(null)
 
@@ -57,6 +57,17 @@ export function AuthProvider({ children }) {
         return false
     }
 
+    async function switchRole(role) {
+        const data = await apiSwitchRole(role)
+
+        if (data && data.user) {
+            setUser(data.user)
+            return true
+        }
+
+        return false
+    }
+
     async function logout() {
         await apiLogout()
         setUser(null)
@@ -70,6 +81,7 @@ export function AuthProvider({ children }) {
         login,
         register,
         loginWithGoogle,
+        switchRole,
         logout
     }
 

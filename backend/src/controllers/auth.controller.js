@@ -229,10 +229,69 @@ async function googleAuthController(req, res) {
     }
 }
 
+// Lets a logged-in user switch between "student" and "organizer".
+// This matters most for Google accounts: the role is only picked when the
+// account is first created, so without this there'd be no way to change it
+// afterwards. Anyone can already choose either role at registration, so this
+// doesn't give out any extra privilege.
+async function switchRoleController(req, res) {
+    try {
+        const { role } = req.body || {}
+
+        if (!['student', 'organizer'].includes(role)) {
+            return res.status(400).json({
+                message: "Role must be either student or organizer"
+            })
+        }
+
+        const user = await userModel.findById(req.user.id)
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" })
+        }
+
+        // nothing to change -> don't churn tokens
+        if (user.role !== role) {
+            user.role = role
+            await user.save()
+
+            // the role is baked into the JWT, so the old token still says the
+            // old role. Blacklist it and hand out a fresh one.
+            const oldToken = req.cookies.token
+            if (oldToken) {
+                await tokenBlacklistModel.create({ token: oldToken })
+            }
+
+            const token = jwt.sign(
+                { id: user._id, name: user.name, role: user.role },
+                process.env.JWT_SECRET,
+                { expiresIn: "1d" }
+            )
+            res.cookie("token", token, cookieOptions)
+        }
+
+        res.status(200).json({
+            message: `You are now using EventHub as ${user.role}`,
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                role: user.role
+            }
+        })
+
+    } catch (err) {
+        res.status(500).json({
+            message: "Something went wrong while switching role"
+        })
+    }
+}
+
 module.exports = {
     registerUserController,
     loginUserController,
     logoutUserController,
     getMeController,
-    googleAuthController
+    googleAuthController,
+    switchRoleController
 }

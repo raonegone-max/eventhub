@@ -13,14 +13,16 @@ import {
     X,
     Sparkles,
     ShieldCheck,
-    GraduationCap
+    GraduationCap,
+    ArrowLeftRight
 } from "lucide-react"
 
 export default function Navbar() {
-    const { user, isLoggedIn, isOrganizer, logout } = useAuth()
+    const { user, isLoggedIn, isOrganizer, logout, switchRole } = useAuth()
     const location = useLocation()
     const navigate = useNavigate()
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    const [switching, setSwitching] = useState(false)
 
     const isActive = (path) => location.pathname === path
 
@@ -28,6 +30,28 @@ export default function Navbar() {
         await logout()
         setMobileMenuOpen(false)
         navigate("/")
+    }
+
+    // flips between student <-> organizer for the logged-in account
+    async function handleSwitchRole() {
+        if (switching) return
+        const target = isOrganizer ? "student" : "organizer"
+        setSwitching(true)
+        const ok = await switchRole(target)
+        setSwitching(false)
+
+        if (!ok) {
+            alert("Couldn't switch role. Please try again.")
+            return
+        }
+
+        setMobileMenuOpen(false)
+
+        // don't leave a student sitting on an organizer-only page
+        const organizerOnly = /^\/(my-events|events\/create|events\/[^/]+\/(edit|checkin))/
+        if (target === "student" && organizerOnly.test(location.pathname)) {
+            navigate("/events")
+        }
     }
 
     return (
@@ -135,6 +159,18 @@ export default function Navbar() {
                                 </div>
 
                                 <button
+                                    onClick={handleSwitchRole}
+                                    disabled={switching}
+                                    title={isOrganizer ? "Switch to Student mode" : "Switch to Organizer mode"}
+                                    className="flex items-center gap-1.5 px-2.5 py-2 rounded-xl text-[11px] font-mono font-semibold text-slate-300 hover:text-amber-300 hover:bg-amber-500/10 border border-white/10 hover:border-amber-400/40 transition-all cursor-pointer disabled:opacity-50"
+                                >
+                                    <ArrowLeftRight className="w-3.5 h-3.5" />
+                                    <span className="hidden lg:inline">
+                                        {isOrganizer ? "Student mode" : "Organizer mode"}
+                                    </span>
+                                </button>
+
+                                <button
                                     onClick={handleLogout}
                                     title="Sign Out"
                                     className="p-2 rounded-xl text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 border border-transparent hover:border-rose-500/20 transition-all cursor-pointer"
@@ -239,6 +275,16 @@ export default function Navbar() {
                                 <Plus className="w-5 h-5 stroke-[2.5]" />
                                 <span>Host New Event</span>
                             </Link>
+                        )}
+                        {isLoggedIn && (
+                            <button
+                                onClick={handleSwitchRole}
+                                disabled={switching}
+                                className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-base font-medium text-slate-300 hover:bg-white/5 hover:text-white transition cursor-pointer disabled:opacity-50"
+                            >
+                                <ArrowLeftRight className="w-5 h-5 text-amber-400" />
+                                <span>{isOrganizer ? "Switch to Student mode" : "Switch to Organizer mode"}</span>
+                            </button>
                         )}
                     </nav>
 

@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
+import { GoogleLogin } from "@react-oauth/google"
 import { useAuth } from "../api/AuthContext"
 import {
     Ticket,
@@ -22,7 +23,7 @@ export default function Register() {
     const [showPassword, setShowPassword] = useState(false)
     const [error, setError] = useState("")
     const [submitting, setSubmitting] = useState(false)
-    const { register } = useAuth()
+    const { register, loginWithGoogle } = useAuth()
     const navigate = useNavigate()
 
     async function handleSubmit(e) {
@@ -41,6 +42,19 @@ export default function Register() {
             setError("Something went wrong during account creation.")
         } finally {
             setSubmitting(false)
+        }
+    }
+
+    // uses whichever role is selected in the "I am a" picker above the button.
+    // For someone who already has an account, the backend keeps their role.
+    async function handleGoogleSuccess(credentialResponse) {
+        setError("")
+        const success = await loginWithGoogle(credentialResponse.credential, role)
+
+        if (success) {
+            navigate("/")
+        } else {
+            setError("Google sign-up failed. Please try again.")
         }
     }
 
@@ -191,6 +205,29 @@ export default function Register() {
                             </button>
                         </div>
                     </form>
+
+                    {/* Divider */}
+                    <div className="flex items-center gap-3">
+                        <div className="flex-1 h-px bg-white/10" />
+                        <span className="text-[10px] font-mono text-slate-500 uppercase">or</span>
+                        <div className="flex-1 h-px bg-white/10" />
+                    </div>
+
+                    {/* Google Sign-Up */}
+                    <div className="space-y-2">
+                        <p className="text-[10px] font-mono text-slate-500 text-center">
+                            Google sign-up uses the role selected above
+                        </p>
+                        <div className="flex justify-center">
+                            <GoogleLogin
+                                onSuccess={handleGoogleSuccess}
+                                onError={() => setError("Google sign-up failed. Please try again.")}
+                                theme="filled_black"
+                                shape="pill"
+                                text="signup_with"
+                            />
+                        </div>
+                    </div>
 
                     {/* Footer */}
                     <div className="pt-4 border-t border-white/5 text-center text-xs text-slate-400">
